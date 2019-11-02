@@ -1,5 +1,5 @@
-# NE Template
-Back-end with Express in MVC Pattern with Typescript
+# NET JS
+NET JS is a web framework base on Express Js in MVC Pattern with Typescript
 
 **1. Setup Enviroment**
 
