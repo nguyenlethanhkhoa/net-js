@@ -1,7 +1,6 @@
 # NET JS
 NET JS is a template base on Express Js in MVC Pattern with Typescript
 
-**1. Setup Environment**
 
 + Install Typescript and Typescript Node on your machine
 
@@ -9,14 +8,16 @@ NET JS is a template base on Express Js in MVC Pattern with Typescript
       npm install -g typescript ts-node
    ```
 
-    + Run Server for Dev
++ Run Server for Dev
 
   ```
     npm run dev
   ```
 
-    + Run Server for Production
++ Run Server for Production
 
     ```
       npm run prod
     ```
+    
+Read more [here](https://github.com/nguyenlethanhkhoa/net-js/wiki/How-I-build-it-%3F)
