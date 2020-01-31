@@ -1,9 +1,13 @@
 import { ICollection } from "./interfaces/collection.interface";
 import { IRoute, IRoutes } from "./interfaces/route.interface";
+import * as express from "express";
 
 export class RouteCollection implements ICollection {
 
     private routes: IRoutes = {};
+
+    constructor() {
+    }
 
     public add(name: string, route: IRoute): void {
         this.routes[name] = route;

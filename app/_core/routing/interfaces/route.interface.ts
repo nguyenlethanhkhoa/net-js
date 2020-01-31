@@ -3,8 +3,8 @@ export interface IRoute {
     setPath(path: string): void;
     getPath(): string;
 
-    setController(controller: string);
-    getController(): string;
+    setController(controller: any);
+    getController(): any;
 
     setMethod(method: string): void;
     getMethod(): string;
@@ -12,4 +12,8 @@ export interface IRoute {
 
 export interface IRoutes {
     [index: string]: IRoute;
+}
+
+export interface IRouteProperties {
+    [index: string]: any;
 }

@@ -1,5 +1,4 @@
-import { IRoute } from "./interfaces/route.interface";
-
+import { IRoute, IRouteProperties } from "./interfaces/route.interface";
 
 export class Route implements IRoute {
 
@@ -7,7 +6,7 @@ export class Route implements IRoute {
     private _method: string;
     private _controller: string;
 
-    constructor(path: string, controller: string, method: string) {
+    constructor(path: string, method: string, controller: any) {
         
         this._path = path;
         this._method = method;
@@ -30,11 +29,11 @@ export class Route implements IRoute {
         return this._method;
     }
     
-    public setController(controller: string) {
+    public setController(controller: any) {
         this._controller = controller;
     }
 
-    public getController(): string {
+    public getController(): any {
         return this._controller;
     }
 }
