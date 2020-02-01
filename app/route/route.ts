@@ -1,16 +1,10 @@
-import { App } from './../app';
-import { Request, Response } from "express";
-import { SampleController } from "./../controller/sample.controller";
+import { Router } from './../_core/routing/router';
+import { SampleController } from './../controller/sample.controller';
 
 export class Route {
+    
+    public execute(): void {
 
-    protected sampleController: SampleController;
-
-    constructor() {
-        this.sampleController = new SampleController();
-    }
-
-    public routes(): void {
-        App.getInstance().getApp().route('/').get(this.sampleController.index);
+        Router.get('/', SampleController, 'index');
     }
 }

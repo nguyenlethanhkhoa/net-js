@@ -35,25 +35,7 @@ class Server {
 
 
     onError(error) {
-        // if (error.syscall !== 'listen') {
-        //     throw error;
-        // }
-        //
-        // var bind = typeof APP_CONFIG.PORT === 'string' ? 'Pipe ' + APP_CONFIG.PORT : 'Port ' + APP_CONFIG.PORT;
-        //
-        // // handle specific listen errors with friendly messages
-        // switch (error.code) {
-        //     case 'EACCES':
-        //         console.error(bind + ' requires elevated privileges');
-        //         process.exit(1);
-        //         break;
-        //     case 'EADDRINUSE':
-        //         console.error(bind + ' is already in use');
-        //         process.exit(1);
-        //         break;
-        //     default:
-        //         throw error;
-        // }
+        
     }
 
     onListening() {
