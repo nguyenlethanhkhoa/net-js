@@ -1,4 +1,5 @@
 import * as express from "express";
+import { Request, Response } from "express";
 import { IRoute } from "./interfaces/route.interface";
 import { ICollection } from "./interfaces/collection.interface";
 import { RouteCollection } from "./route-collection";
@@ -15,24 +16,24 @@ export class Router {
         Router._instance = this;
     }
 
-    public static get(path: string, controller: any, name: string = null): void {
-        name = name == null ? path : name;
-        Router._instance.getRouteCollection().add(name, new Route(path, METHOD.GET, controller));
+    public static get(path: string, controller: any, controllerMethod: string = null, name: string = null): void {
+        name = name == null ? 'get' + path : name;
+        Router._instance.getRouteCollection().add(name, new Route(path, METHOD.GET, controller, controllerMethod));
     }
 
-    public static post(path: string, controller: any, name: string = null): void {
-        name = name == null ? path : name;
-        Router._instance.getRouteCollection().add(name, new Route(path, METHOD.POST, controller));
+    public static post(path: string, controller: any, controllerMethod: string, name: string = null): void {
+        name = name == null ? 'post' + path : name;
+        Router._instance.getRouteCollection().add(name, new Route(path, METHOD.POST, controller, controllerMethod));
     }
 
-    public static put(path: string, controller: any, name: string = null): void {
-        name = name == null ? path : name;
-        Router._instance.getRouteCollection().add(name, new Route(path, METHOD.PUT, controller));
+    public static put(path: string, controller: any, controllerMethod: string, name: string = null): void {
+        name = name == null ? 'put' + path : name;
+        Router._instance.getRouteCollection().add(name, new Route(path, METHOD.PUT, controller, controllerMethod));
     }
 
-    public static delete(path: string, controller: any, name: string = null): void {
-        name = name == null ? path : name;
-        Router._instance.getRouteCollection().add(name, new Route(path, METHOD.DELETE, controller));
+    public static delete(path: string, controller: any, controllerMethod: string, name: string = null): void {
+        name = name == null ? 'delete' + path : name;
+        Router._instance.getRouteCollection().add(name, new Route(path, METHOD.DELETE, controller, controllerMethod));
     }
 
     public getRouteCollection(): ICollection {
@@ -43,29 +44,42 @@ export class Router {
         return this._routeCollection;
     }
 
-    public register(route: IRoute, controller: any): void {
+    public register(route: IRoute, _controller: any, _arguments: any[] = []): void {
+
+        if (route.isRegistered()) {
+            return;
+        }
+
         if (typeof this[route.getMethod()] != 'function') {
             // throw exception
             return;
         }
 
-        route.setController(controller);
-        this[route.getMethod()](route);
+        route.register();
+        this[route.getMethod()](route.getPath(), _controller, _arguments);
     }
 
-    private _get(route: IRoute): void {
-        this.app.route(route.getPath()).get(route.getController());
+    private _get(path: string, _controller: any, _arguments: any[] = []): void {
+        this.app.route(path).get((req: Request, res: Response) => {
+            _controller(req, res);
+        });
     }
 
-    private _post(route: IRoute): void {
-        this.app.route(route.getPath()).post(route.getController());
+    private _post(path: string, _controller: any, _arguments: any[] = []): void {
+        this.app.route(path).post((req: Request, res: Response) => {
+            _controller(req, res);
+        });
     }
 
-    private _put(route: IRoute): void {
-        this.app.route(route.getPath()).put(route.getController());
+    private _put(path: string, _controller: any, _arguments: any[] = []): void {
+        this.app.route(path).put((req: Request, res: Response) => {
+            _controller(req, res);
+        });
     }
 
-    private _delete(route: IRoute): void {
-        this.app.route(route.getPath()).delete(route.getController());
+    private _delete(path: string, _controller: any, _arguments: any[] = []): void {
+        this.app.route(path).delete((req: Request, res: Response) => {
+            _controller(req, res);
+        });
     }
 }

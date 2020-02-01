@@ -2,12 +2,13 @@ export interface IRoute {
 
     setPath(path: string): void;
     getPath(): string;
-
-    setController(controller: any);
-    getController(): any;
-
-    setMethod(method: string): void;
     getMethod(): string;
+
+    getController(): any;
+    getControllerMethod(): string;
+
+    register(): void;
+    isRegistered(): boolean;
 }
 
 export interface IRoutes {
